@@ -1,17 +1,16 @@
 import Link from "next/link";
 import Image from "next/image";
-import HeaderTop from "./HeaderTop";
-import OnepageMenu from "../OnepageMenu";
-import OnepageMobileMenu from "../OnepageMobileMenu";
+import MobileMenu from "../MobileMenu";
 
 // ✅ Define props type
 type Header2Props = {
   scroll: boolean;
+  isMobileMenu: boolean;
   handleMobileMenu: () => void;
   handlePopup: () => void;
 };
 
-export default function Header2({ scroll, handleMobileMenu, handlePopup }: Header2Props) {
+export default function Header2({ scroll, isMobileMenu, handleMobileMenu, handlePopup }: Header2Props) {
   return (
     <>
       <style jsx>{`
@@ -167,10 +166,12 @@ export default function Header2({ scroll, handleMobileMenu, handlePopup }: Heade
         </div>
       </header>
       
-      <OnepageMobileMenu
-        isSidebar={false}
-        handleMobileMenu={handleMobileMenu}
-      />
+      {isMobileMenu && (
+        <MobileMenu
+          isSidebar={isMobileMenu}
+          handleMobileMenu={handleMobileMenu}
+        />
+      )}
     </>
   );
 }
