@@ -1,5 +1,3 @@
-
-import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -9,150 +7,156 @@ type MobileMenuProps = {
 };
 
 export default function MobileMenu({ handleMobileMenu }: MobileMenuProps) {
-  const [activeDropdown, setActiveDropdown] = useState<number | null>(null);
-
-  const toggleDropdown = (key: number) => {
-    if (activeDropdown === key) {
-      setActiveDropdown(null);
-    } else {
-      setActiveDropdown(key);
-    }
-  };
-
   return (
     <>
-      {/* Mobile Menu */}
-      <div className="mobile-menu">
-        <div className="menu-backdrop" onClick={handleMobileMenu} />
-        <div className="close-btn" onClick={handleMobileMenu}>
-          <span className="fas fa-times" />
+      <style jsx>{`
+        .mobile-menu-overlay {
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100vh;
+          background: rgba(0,0,0,0.7);
+          z-index: 9998;
+          animation: fadeIn 0.3s ease;
+        }
+        .mobile-menu-panel {
+          position: fixed;
+          top: 0;
+          right: 0;
+          width: 280px;
+          height: 100vh;
+          background: linear-gradient(135deg, #6B2C5C 0%, #8B3A6E 100%);
+          z-index: 9999;
+          padding: 30px;
+          overflow-y: auto;
+          animation: slideInRight 0.3s ease;
+        }
+        .mobile-close {
+          position: absolute;
+          top: 20px;
+          right: 20px;
+          width: 40px;
+          height: 40px;
+          background: rgba(255,255,255,0.1);
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          cursor: pointer;
+          transition: all 0.3s ease;
+        }
+        .mobile-close:hover {
+          background: rgba(255,255,255,0.2);
+          transform: rotate(90deg);
+        }
+        .mobile-close::before,
+        .mobile-close::after {
+          content: '';
+          position: absolute;
+          width: 20px;
+          height: 2px;
+          background: #ffffff;
+        }
+        .mobile-close::before {
+          transform: rotate(45deg);
+        }
+        .mobile-close::after {
+          transform: rotate(-45deg);
+        }
+        .mobile-logo {
+          margin-bottom: 40px;
+          padding-bottom: 30px;
+          border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        .mobile-nav {
+          list-style: none;
+          padding: 0;
+          margin: 0;
+        }
+        .mobile-nav li {
+          margin-bottom: 20px;
+        }
+        .mobile-nav li a {
+          color: #ffffff;
+          font-size: 16px;
+          font-weight: 600;
+          text-transform: uppercase;
+          text-decoration: none;
+          display: block;
+          padding: 12px 20px;
+          border-radius: 8px;
+          transition: all 0.3s ease;
+          letter-spacing: 0.5px;
+        }
+        .mobile-nav li a:hover {
+          background: rgba(255,255,255,0.1);
+          transform: translateX(5px);
+          color: #FF4081;
+        }
+        .mobile-cta {
+          margin-top: 30px;
+          padding-top: 30px;
+          border-top: 1px solid rgba(255,255,255,0.1);
+        }
+        .mobile-cta a {
+          display: block;
+          background: #ffffff;
+          color: #6B2C5C;
+          padding: 15px 25px;
+          border-radius: 30px;
+          text-align: center;
+          font-size: 14px;
+          font-weight: 700;
+          text-transform: uppercase;
+          text-decoration: none;
+          transition: all 0.3s ease;
+        }
+        .mobile-cta a:hover {
+          background: #FF4081;
+          color: #ffffff;
+          transform: scale(1.05);
+        }
+        @keyframes fadeIn {
+          from { opacity: 0; }
+          to { opacity: 1; }
+        }
+        @keyframes slideInRight {
+          from {
+            transform: translateX(100%);
+            opacity: 0;
+          }
+          to {
+            transform: translateX(0);
+            opacity: 1;
+          }
+        }
+      `}</style>
+
+      <div className="mobile-menu-overlay" onClick={handleMobileMenu} />
+      
+      <div className="mobile-menu-panel">
+        <div className="mobile-close" onClick={handleMobileMenu}></div>
+        
+        <div className="mobile-logo">
+          <Link href="/">
+            <Image src="/assets/images/logo-ds.png" alt="DS Crédito" width={90} height={30} priority />
+          </Link>
         </div>
-        <nav className="menu-box">
-          <div className="nav-logo">
-            <Link href="/"><Image src="/assets/images/logo.png" alt="Logo Image" width={161} height={44} priority /></Link>
-          </div>
-          <div className="menu-outer">
-            <ul className="navigation clearfix">
 
-              {/* Home */}
-              <li className={`dropdown ${activeDropdown === 1 ? "current" : ""}`}>
-                <Link href="/#">Home</Link>
-                <ul style={{ display: activeDropdown === 1 ? "block" : "none" }}>
-                  <li><Link href="/" onClick={handleMobileMenu}>Home Page 01</Link></li>
-                  <li><Link href="/index-2" onClick={handleMobileMenu}>Home Page 02</Link></li>
-                  <li><Link href="/index-3" onClick={handleMobileMenu}>Home Page 03</Link></li>
-                  <li><Link href="/index-onepage" onClick={handleMobileMenu}>OnePage Home</Link></li>
-                </ul>
-                <div className={`dropdown-btn ${activeDropdown === 1 ? "open" : ""}`} onClick={() => toggleDropdown(1)}>
-                  <span className="fa fa-angle-right" />
-                </div>
-              </li>
+        <ul className="mobile-nav">
+          <li><a href="#inicio" onClick={handleMobileMenu}>Início</a></li>
+          <li><a href="#quem-somos" onClick={handleMobileMenu}>Quem Somos</a></li>
+          <li><a href="#testemunhos" onClick={handleMobileMenu}>Testemunhos</a></li>
+          <li><a href="#valores" onClick={handleMobileMenu}>Valores</a></li>
+          <li><a href="#equipa" onClick={handleMobileMenu}>Equipa</a></li>
+          <li><a href="#contactos" onClick={handleMobileMenu}>Contactos</a></li>
+        </ul>
 
-              {/* About */}
-              <li className={`dropdown ${activeDropdown === 2 ? "current" : ""}`}>
-                <Link href="/#">About</Link>
-                <ul style={{ display: activeDropdown === 2 ? "block" : "none" }}>
-                  <li><Link href="/about" onClick={handleMobileMenu}>About Company</Link></li>
-                  <li><Link href="/team" onClick={handleMobileMenu}>Meet Our Team</Link></li>
-                  <li><Link href="/faq" onClick={handleMobileMenu}>FAQ&apos;s</Link></li>
-                  <li><Link href="/testimonials" onClick={handleMobileMenu}>Testimonials</Link></li>
-                  <li><Link href="/overview" onClick={handleMobileMenu}>Overview</Link></li>
-                  <li><Link href="/place-job" onClick={handleMobileMenu}>Place Job Order</Link></li>
-                </ul>
-                <div className={`dropdown-btn ${activeDropdown === 2 ? "open" : ""}`} onClick={() => toggleDropdown(2)}>
-                  <span className="fa fa-angle-right" />
-                </div>
-              </li>
-
-              {/* Solutions */}
-              <li className={`dropdown ${activeDropdown === 3 ? "current" : ""}`}>
-                <Link href="/#">Solutions</Link>
-                <ul style={{ display: activeDropdown === 3 ? "block" : "none" }}>
-                  <li><Link href="/service" onClick={handleMobileMenu}>Our Solutions</Link></li>
-                  <li><Link href="/temprory-staffing" onClick={handleMobileMenu}>Temprory Staffing</Link></li>
-                  <li><Link href="/direct-hire" onClick={handleMobileMenu}>Direct Hire</Link></li>
-                  <li><Link href="/contract-hire" onClick={handleMobileMenu}>Contract to Hire</Link></li>
-                  <li><Link href="/payrolling" onClick={handleMobileMenu}>Payrolling</Link></li>
-                  <li><Link href="/training" onClick={handleMobileMenu}>Training</Link></li>
-                  <li><Link href="/executive-search" onClick={handleMobileMenu}>Executive Search</Link></li>
-                </ul>
-                <div className={`dropdown-btn ${activeDropdown === 3 ? "open" : ""}`} onClick={() => toggleDropdown(3)}>
-                  <span className="fa fa-angle-right" />
-                </div>
-              </li>
-
-              {/* Job Seekers */}
-              <li className={`dropdown ${activeDropdown === 4 ? "current" : ""}`}>
-                <Link href="/#">Job Seekers</Link>
-                <ul style={{ display: activeDropdown === 4 ? "block" : "none" }}>
-                  <li><Link href="/overview_two" onClick={handleMobileMenu}>Job Overview</Link></li>
-                  <li><Link href="/job-openings" onClick={handleMobileMenu}>Job Openings</Link></li>
-                  <li><Link href="/job-details" onClick={handleMobileMenu}>Detail Page</Link></li>
-                  <li><Link href="/apply-now" onClick={handleMobileMenu}>Apply Now</Link></li>
-                </ul>
-                <div className={`dropdown-btn ${activeDropdown === 4 ? "open" : ""}`} onClick={() => toggleDropdown(4)}>
-                  <span className="fa fa-angle-right" />
-                </div>
-              </li>
-
-              {/* Portfolio */}
-              <li className={`dropdown ${activeDropdown === 5 ? "current" : ""}`}>
-                <Link href="/#">Portfolio</Link>
-                <ul style={{ display: activeDropdown === 5 ? "block" : "none" }}>
-                  <li><Link href="/portfolio-1" onClick={handleMobileMenu}>Grid View 01</Link></li>
-                  <li><Link href="/portfolio-2" onClick={handleMobileMenu}>Grid View 02</Link></li>
-                  <li><Link href="/portfolio-3" onClick={handleMobileMenu}>Masonry View</Link></li>
-                  <li><Link href="/portfolio-4" onClick={handleMobileMenu}>Fullwidth View 01</Link></li>
-                  <li><Link href="/portfolio-5" onClick={handleMobileMenu}>Fullwidth View 02</Link></li>
-                </ul>
-                <div className={`dropdown-btn ${activeDropdown === 5 ? "open" : ""}`} onClick={() => toggleDropdown(5)}>
-                  <span className="fa fa-angle-right" />
-                </div>
-              </li>
-
-              {/* Blog */}
-              <li className={`dropdown ${activeDropdown === 6 ? "current" : ""}`}>
-                <Link href="/#">Blog</Link>
-                <ul style={{ display: activeDropdown === 6 ? "block" : "none" }}>
-                  <li><Link href="/blog-grid" onClick={handleMobileMenu}>Grid View</Link></li>
-                  <li><Link href="/blog-list" onClick={handleMobileMenu}>List View</Link></li>
-                  <li><Link href="/blog-details" onClick={handleMobileMenu}>Single Post</Link></li>
-                </ul>
-                <div className={`dropdown-btn ${activeDropdown === 6 ? "open" : ""}`} onClick={() => toggleDropdown(6)}>
-                  <span className="fa fa-angle-right" />
-                </div>
-              </li>
-              <li><Link href="/contact" onClick={handleMobileMenu}>Contact</Link></li>
-            </ul>
-          </div>
-
-          <div className="contact-info">
-              <h4>Contact Info</h4>
-              <ul>
-                  <li>Chicago 12, Melborne City, USA</li>
-                  <li><Link href="tel:+8801682648101">+88 01682648101</Link></li>
-                  <li><Link href="mailto:info@example.com">info@example.com</Link></li>
-              </ul>
-          </div>
-
-          {/* Social Links */}
-          <div className="social-links">
-            <ul className="clearfix">
-              <li><Link href="/#"><span className="fab fa-twitter" /></Link></li>
-              <li><Link href="/#"><span className="fab fa-facebook-square" /></Link></li>
-              <li><Link href="/#"><span className="fab fa-pinterest-p" /></Link></li>
-              <li><Link href="/#"><span className="fab fa-instagram" /></Link></li>
-              <li><Link href="/#"><span className="fab fa-youtube" /></Link></li>
-            </ul>
-          </div>
-
-        </nav>
+        <div className="mobile-cta">
+          <a href="#simulador" onClick={handleMobileMenu}>Simular Crédito</a>
+        </div>
       </div>
-
-      {/* Overlay */}
-      <div
-        className="nav-overlay"
-      />
     </>
   );
 }

@@ -3,31 +3,34 @@ import About from "@/components/sections/home2/About"
 import Banner from "@/components/sections/home2/Banner"
 import ContactInfo from "@/components/sections/home2/Contactinfo"
 import Simulator from "@/components/sections/home2/Simulator"
+import Testemunhos from "@/components/sections/home2/Testemunhos"
+import Valores from "@/components/sections/home2/Valores"
+import Equipa from "@/components/sections/home2/Equipa"
 import ScrollProgress from "@/components/elements/ScrollProgress"
 
 export default function Home_OnePage() {
     const jsonLd = {
         "@context": "https://schema.org",
         "@type": "FinancialService",
-        "name": "DS Intermediários de Crédito",
+        "name": "DS Intermediários de Crédito - Leiria Beira Rio",
         "description": "Intermediários de crédito especializados em crédito habitação e soluções de financiamento imobiliário em Portugal",
         "url": "https://dsicredito.pt",
         "logo": "https://dsicredito.pt/assets/images/logo-ds.png",
         "image": "https://dsicredito.pt/assets/images/logo-ds.png",
-        "telephone": "+351226007286",
-        "email": "info@dsicredito.pt",
+        "telephone": "+351913016845",
+        "email": "catarinateixeira@dsicredito.pt",
         "address": {
             "@type": "PostalAddress",
-            "streetAddress": "Av. Sacadura Cabral, 3812",
-            "addressLocality": "São Félix da Marinha",
-            "addressRegion": "Porto",
-            "postalCode": "4410-099",
+            "streetAddress": "Rua Anzebino da Cruz Saraiva, loja 34, Piso 0",
+            "addressLocality": "Leiria",
+            "addressRegion": "Leiria",
+            "postalCode": "2415-371",
             "addressCountry": "PT"
         },
         "geo": {
             "@type": "GeoCoordinates",
-            "latitude": "41.0883",
-            "longitude": "-8.6648"
+            "latitude": "39.7436",
+            "longitude": "-8.8071"
         },
         "openingHoursSpecification": {
             "@type": "OpeningHoursSpecification",
@@ -56,7 +59,10 @@ export default function Home_OnePage() {
             />
             <Layout headerStyle={4} footerStyle={2}>
                 <Banner />
-                <About /> 
+                <About />
+                <Testemunhos />
+                <Valores />
+                <Equipa />
                 <Simulator />
                 <ContactInfo />
             </Layout>

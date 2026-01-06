@@ -8,7 +8,7 @@ export default function PlaceJob_Page() {
   return (
     <Layout
       headerStyle={1}
-      footerStyle={4}
+      footerStyle={2}
       breadcrumbTitle="FAQ'S"
       breadcrumbTitleTwo="Things You Need to Know and We Know You Need"
       breadcrumbTitleThree="Employers"

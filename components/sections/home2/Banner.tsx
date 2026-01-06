@@ -28,7 +28,7 @@ export default function Banner() {
     <>
         <style jsx>{`
             .premium-banner {
-                margin-top: 80px;
+                margin-top: 90px;
                 position: relative;
                 width: 100%;
                 height: 700px;
@@ -294,7 +294,7 @@ export default function Banner() {
             }
         `}</style>
         
-        <section className="premium-banner">
+        <section className="premium-banner" id="inicio">
             <Swiper {...swiperOptions}>
                 <SwiperSlide>
                     <div className="banner-slide">

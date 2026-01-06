@@ -5,7 +5,7 @@ import Link from "next/link"
 export default function ContactInfo() {
   return (
     <>
-        <section className="contactinfo-section bg-color-2" id="contacto">
+        <section className="contactinfo-section bg-color-2" id="contactos">
             <div className="pattern-layer" style={{ backgroundImage: "url(/assets/images/shape/pattern-24.png)" }}></div>
             <div className="auto-container">
                 <div className="row align-items-center clearfix">
@@ -22,9 +22,7 @@ export default function ContactInfo() {
                                         <div className="inner">
                                             <h4>Telefone</h4>
                                             <p>
-                                                <Link href="tel:+351226007286">226 007 286</Link> / 
-                                                <Link href="tel:+351226007287">87</Link> / 
-                                                <Link href="tel:+351226007288">88</Link>
+                                                <Link href="tel:+351913016845">913 016 845</Link>
                                             </p>
                                         </div>
                                     </li>
@@ -33,7 +31,7 @@ export default function ContactInfo() {
                                         <div className="inner">
                                             <h4>Email</h4>
                                             <p>
-                                                <Link href="mailto:info@dsicredito.pt">info@dsicredito.pt</Link>
+                                                <Link href="mailto:catarinateixeira@dsicredito.pt">catarinateixeira@dsicredito.pt</Link>
                                             </p>
                                         </div>
                                     </li>
@@ -42,6 +40,13 @@ export default function ContactInfo() {
                                         <div className="inner">
                                             <h4>Horário</h4>
                                             <p>Seg - Sex: 9h às 18h<br />Sábado e Domingo: Fechado</p>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <figure className="icon-box"><Image src="/assets/images/icons/icon-41.png" alt="Morada" width={62} height={62} priority /></figure>
+                                        <div className="inner">
+                                            <h4>Morada</h4>
+                                            <p>Rua Anzebino da Cruz Saraiva, loja 34<br />Piso 0, 2415-371 Leiria</p>
                                         </div>
                                     </li>
                                 </ul>

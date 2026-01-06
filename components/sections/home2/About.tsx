@@ -4,7 +4,7 @@ import Image from "next/image";
 export default function About() {
   return (
     <>
-        <section className="about-style-two" id="about" style={{ padding: '80px 0', backgroundColor: '#f9f9f9' }}>
+        <section className="about-style-two" id="quem-somos" style={{ padding: '80px 0', backgroundColor: '#f9f9f9' }}>
             <div className="auto-container">
                 <div className="inner-container">
                     <div className="row clearfix">

@@ -8,7 +8,7 @@ export default function Error_Page() {
   return (
     <Layout
       headerStyle={1}
-      footerStyle={4}>
+      footerStyle={2}>
       <section className="error-section centred">
         <div className="auto-container">
             <div className="row clearfix">

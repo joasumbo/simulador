@@ -7,7 +7,7 @@ import Clients from "@/components/sections/home2/Clients";
 export default function Contact_Page() {
 
     return (
-        <Layout headerStyle={1} footerStyle={4} breadcrumbTitle="Get In Touch" breadcrumbTitleTwo="Smarter Business Solutions. Better Customer Relations." breadcrumbTitleThree="Contact">
+        <Layout headerStyle={1} footerStyle={2} breadcrumbTitle="Get In Touch" breadcrumbTitleTwo="Smarter Business Solutions. Better Customer Relations." breadcrumbTitleThree="Contact">
             
             <section className="contactinfo-section contact-page-section">
                 <div className="auto-container">

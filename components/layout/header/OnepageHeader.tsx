@@ -31,7 +31,7 @@ export default function Header2({ scroll, isMobileMenu, handleMobileMenu, handle
           display: flex;
           justify-content: space-between;
           align-items: center;
-          height: 80px;
+          height: 90px;
         }
         
         .logo-area {
@@ -124,7 +124,7 @@ export default function Header2({ scroll, isMobileMenu, handleMobileMenu, handle
         @media (max-width: 991px) {
           .header-container {
             padding: 0 20px;
-            height: 70px;
+            height: 80px;
           }
           
           .nav-right {
@@ -141,7 +141,7 @@ export default function Header2({ scroll, isMobileMenu, handleMobileMenu, handle
         <div className="header-container">
           <div className="logo-area">
             <Link href="/">
-              <Image src="/assets/images/logo-ds.png" alt="DS Crédito" width={100} height={33} priority />
+              <Image src="/assets/images/logo-ds.png" alt="DS Crédito" width={90} height={30} priority />
             </Link>
           </div>
           
@@ -154,11 +154,12 @@ export default function Header2({ scroll, isMobileMenu, handleMobileMenu, handle
           <div className="nav-right">
             <nav>
               <ul className="professional-menu">
-                <li><a href="https://dsicredito.pt/quem-somos/" target="_blank" rel="noopener noreferrer">Quem Somos</a></li>
-                <li><a href="https://dsicredito.pt/servicos/" target="_blank" rel="noopener noreferrer">Serviços</a></li>
-                <li><a href="https://dsicredito.pt/oportunidades-de-carreira/" target="_blank" rel="noopener noreferrer">Oportunidades de Carreira</a></li>
-                <li><a href="https://dsicredito.pt/blog/" target="_blank" rel="noopener noreferrer">Blog</a></li>
-                <li><a href="https://dsicredito.pt/contactos/" target="_blank" rel="noopener noreferrer">Contactos</a></li>
+                <li><a href="#inicio">Início</a></li>
+                <li><a href="#quem-somos">Quem Somos</a></li>
+                <li><a href="#testemunhos">Testemunhos</a></li>
+                <li><a href="#valores">Valores</a></li>
+                <li><a href="#equipa">Equipa</a></li>
+                <li><a href="#contactos">Contactos</a></li>
               </ul>
             </nav>
             <a href="#simulador" className="cta-button">Simular Crédito</a>

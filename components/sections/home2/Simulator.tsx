@@ -18,7 +18,15 @@ export default function Simulator() {
     const [prazo, setPrazo] = useState<number>(30)
     const [tan, setTan] = useState<number>(3.5)
     const [nome, setNome] = useState<string>('')
+    const [telemovel, setTelemovel] = useState<string>('')
     const [email, setEmail] = useState<string>('')
+    const [tipoCredito, setTipoCredito] = useState<string>('')
+    const [residenciaFiscal, setResidenciaFiscal] = useState<string>('')
+    const [estatutoPortugal, setEstatutoPortugal] = useState<string>('')
+    const [incidentesBP, setIncidentesBP] = useState<string>('')
+    const [situacaoProfissional, setSituacaoProfissional] = useState<string>('')
+    const [rendimentosAgregado, setRendimentosAgregado] = useState<string>('')
+    const [consentimento, setConsentimento] = useState<boolean>(false)
     const [showSuccess, setShowSuccess] = useState<boolean>(false)
     const [loadingResults, setLoadingResults] = useState<boolean>(false)
 
@@ -67,6 +75,8 @@ export default function Simulator() {
             email: email,
             subject: 'Simulação de Crédito Habitação',
             message: `Simulação realizada:
+
+DADOS DO CRÉDITO:
 Montante: €${formatCurrency(montante)}
 Entrada: €${formatCurrency(entrada)}
 Prazo: ${prazo} anos
@@ -74,7 +84,18 @@ TAN: ${formatPercentage(tan, 3)}%
 Prestação Mensal: €${formatCurrency(prestacaoMensal)}
 TAEG: ${formatPercentage(taeg, 1)}%
 MTIC: €${formatCurrency(mtic)}
-Montante Total: €${formatCurrency(montanteTotal)}`
+Montante Total: €${formatCurrency(montanteTotal)}
+
+DADOS DO CLIENTE:
+Nome: ${nome}
+Telemóvel: ${telemovel}
+Email: ${email}
+Tipo de Crédito: ${tipoCredito}
+Residência Fiscal em Portugal: ${residenciaFiscal}
+Estatuto em Portugal: ${estatutoPortugal}
+Incidentes no Banco de Portugal: ${incidentesBP}
+Situação Profissional: ${situacaoProfissional}
+Rendimentos do Agregado: ${rendimentosAgregado}`
         }
         
         try {
@@ -90,7 +111,15 @@ Montante Total: €${formatCurrency(montanteTotal)}`
                 setShowSuccess(true)
                 setTimeout(() => setShowSuccess(false), SUCCESS_MESSAGE_DURATION)
                 setNome('')
+                setTelemovel('')
                 setEmail('')
+                setTipoCredito('')
+                setResidenciaFiscal('')
+                setEstatutoPortugal('')
+                setIncidentesBP('')
+                setSituacaoProfissional('')
+                setRendimentosAgregado('')
+                setConsentimento(false)
             }
         } catch (error) {
             console.error('Erro ao enviar simulação:', error)
@@ -101,11 +130,11 @@ Montante Total: €${formatCurrency(montanteTotal)}`
         <>
             <style jsx>{`
                 .premium-simulator {
-                    padding: 100px 0;
+                    padding: 60px 0;
                     background: #fafafa;
                     position: relative;
                 }
-                .section-header { text-align: center; margin-bottom: 60px; }
+                .section-header { text-align: center; margin-bottom: 40px; }
                 .section-tag {
                     display: inline-block;
                     background: linear-gradient(135deg, #C2185B 0%, #880E4F 100%);
@@ -135,9 +164,11 @@ Montante Total: €${formatCurrency(montanteTotal)}`
                 .simulator-grid {
                     display: grid;
                     grid-template-columns: 1.2fr 0.8fr;
-                    gap: 40px;
+                    gap: 30px;
                     max-width: 1400px;
                     margin: 0 auto;
+                    align-items: start;
+                    min-height: 100vh;
                 }
                 .simulator-card {
                     background: #ffffff;
@@ -264,6 +295,123 @@ Montante Total: €${formatCurrency(montanteTotal)}`
                     border-color: #C2185B;
                     box-shadow: 0 0 0 4px rgba(194, 24, 91, 0.1);
                 }
+                .form-select {
+                    width: 100%;
+                    padding: 16px 20px;
+                    font-size: 16px;
+                    font-weight: 600;
+                    border: 2px solid #e9ecef;
+                    border-radius: 12px;
+                    transition: all 0.3s ease;
+                    outline: none;
+                    background: #ffffff;
+                    cursor: pointer;
+                }
+                .form-select:focus {
+                    border-color: #C2185B;
+                    box-shadow: 0 0 0 4px rgba(194, 24, 91, 0.1);
+                }
+                .section-divider {
+                    display: flex;
+                    align-items: center;
+                    text-align: center;
+                    margin: 32px 0 24px 0;
+                }
+                .section-divider span {
+                    padding: 0 20px;
+                    font-size: 16px;
+                    font-weight: 700;
+                    color: #C2185B;
+                    text-transform: uppercase;
+                    letter-spacing: 1px;
+                    background: #ffffff;
+                    position: relative;
+                    z-index: 1;
+                }
+                .section-divider::before {
+                    content: '';
+                    flex: 1;
+                    height: 2px;
+                    background: linear-gradient(90deg, transparent, #e9ecef, transparent);
+                }
+                .section-divider::after {
+                    content: '';
+                    flex: 1;
+                    height: 2px;
+                    background: linear-gradient(90deg, transparent, #e9ecef, transparent);
+                }
+                .radio-group {
+                    display: flex;
+                    gap: 20px;
+                    margin-top: 8px;
+                }
+                .radio-option {
+                    display: flex;
+                    align-items: center;
+                    gap: 8px;
+                    cursor: pointer;
+                    padding: 12px 20px;
+                    border: 2px solid #e9ecef;
+                    border-radius: 8px;
+                    transition: all 0.3s ease;
+                    flex: 1;
+                }
+                .radio-option:hover {
+                    border-color: #C2185B;
+                    background: #fef5f9;
+                }
+                .radio-option input[type="radio"] {
+                    width: 20px;
+                    height: 20px;
+                    cursor: pointer;
+                    accent-color: #C2185B;
+                }
+                .radio-option input[type="radio"]:checked + span {
+                    color: #C2185B;
+                    font-weight: 700;
+                }
+                .radio-option span {
+                    font-size: 15px;
+                    font-weight: 600;
+                    color: #666666;
+                    transition: all 0.3s ease;
+                }
+                .checkbox-group {
+                    margin: 20px 0;
+                    padding: 20px;
+                    background: #f8f9fa;
+                    border-radius: 12px;
+                    border: 2px solid #e9ecef;
+                }
+                .checkbox-label {
+                    display: flex;
+                    gap: 12px;
+                    cursor: pointer;
+                    align-items: flex-start;
+                }
+                .checkbox-label input[type="checkbox"] {
+                    width: 20px;
+                    height: 20px;
+                    cursor: pointer;
+                    accent-color: #C2185B;
+                    flex-shrink: 0;
+                    margin-top: 2px;
+                }
+                .checkbox-label span {
+                    font-size: 13px;
+                    line-height: 1.6;
+                    color: #666666;
+                }
+                .submit-btn:disabled {
+                    background: #cccccc;
+                    cursor: not-allowed;
+                    box-shadow: none;
+                    transform: none;
+                }
+                .submit-btn:disabled:hover {
+                    transform: none;
+                    box-shadow: none;
+                }
                 .contact-grid {
                     display: grid;
                     grid-template-columns: repeat(2, 1fr);
@@ -328,17 +476,38 @@ Montante Total: €${formatCurrency(montanteTotal)}`
                     background: #ffffff;
                     border: 1px solid rgba(0,0,0,0.06);
                     border-radius: 12px;
-                    padding: 40px;
+                    padding: 24px;
                     box-shadow: 0 2px 8px rgba(0,0,0,0.04);
                     position: sticky;
                     top: 120px;
+                    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+                    max-height: calc(100vh - 140px);
+                    overflow-y: auto;
+                }
+                .results-card:hover {
+                    box-shadow: 0 8px 24px rgba(194, 24, 91, 0.12);
+                    border-color: rgba(194, 24, 91, 0.15);
+                }
+                .results-card::-webkit-scrollbar {
+                    width: 6px;
+                }
+                .results-card::-webkit-scrollbar-track {
+                    background: #f1f1f1;
+                    border-radius: 10px;
+                }
+                .results-card::-webkit-scrollbar-thumb {
+                    background: linear-gradient(135deg, #C2185B 0%, #880E4F 100%);
+                    border-radius: 10px;
+                }
+                .results-card::-webkit-scrollbar-thumb:hover {
+                    background: linear-gradient(135deg, #880E4F 0%, #C2185B 100%);
                 }
                 .results-title {
                     font-size: 13px;
                     font-weight: 700;
                     text-transform: uppercase;
                     letter-spacing: 1.2px;
-                    margin-bottom: 28px;
+                    margin-bottom: 16px;
                     color: #5a6c7d;
                     text-align: center;
                 }
@@ -346,8 +515,8 @@ Montante Total: €${formatCurrency(montanteTotal)}`
                     background: #f8f9fa;
                     border: 2px solid #C2185B;
                     border-radius: 12px;
-                    padding: 24px;
-                    margin-bottom: 32px;
+                    padding: 20px;
+                    margin-bottom: 20px;
                     text-align: center;
                 }
                 .prestacao-label {
@@ -359,7 +528,7 @@ Montante Total: €${formatCurrency(montanteTotal)}`
                     font-weight: 700;
                 }
                 .prestacao-value {
-                    font-size: 42px;
+                    font-size: 36px;
                     font-weight: 700;
                     letter-spacing: -0.5px;
                     color: #2c3e50;
@@ -401,7 +570,7 @@ Montante Total: €${formatCurrency(montanteTotal)}`
                     display: flex;
                     justify-content: space-between;
                     align-items: flex-start;
-                    padding: 20px 0;
+                    padding: 14px 0;
                     border-bottom: 1px solid #e9ecef;
                 }
                 .result-item:last-child {
@@ -485,6 +654,8 @@ Montante Total: €${formatCurrency(montanteTotal)}`
                     .results-card {
                         position: relative;
                         top: 0;
+                        max-height: none;
+                        overflow-y: visible;
                     }
                     .simulator-card, .results-card {
                         padding: 30px;
@@ -589,32 +760,179 @@ Montante Total: €${formatCurrency(montanteTotal)}`
                                         />
                                     </div>
 
-                                    <div className="contact-grid">
-                                        <div>
-                                            <label className="input-label">Nome (Opcional)</label>
-                                            <input
-                                                type="text"
-                                                className="form-input"
-                                                value={nome}
-                                                onChange={(e) => setNome(e.target.value)}
-                                                placeholder="Seu nome"
-                                                suppressHydrationWarning
-                                            />
-                                        </div>
-                                        <div>
-                                            <label className="input-label">Email (Opcional)</label>
-                                            <input
-                                                type="email"
-                                                className="form-input"
-                                                value={email}
-                                                onChange={(e) => setEmail(e.target.value)}
-                                                placeholder="seu@email.com"
-                                                suppressHydrationWarning
-                                            />
+                                    <div className="section-divider">
+                                        <span>Informações Pessoais</span>
+                                    </div>
+
+                                    <div className="input-group">
+                                        <label className="input-label">Tipo de crédito pretendido *</label>
+                                        <select
+                                            className="form-select"
+                                            value={tipoCredito}
+                                            onChange={(e) => setTipoCredito(e.target.value)}
+                                            required
+                                        >
+                                            <option value="">Selecione uma opção</option>
+                                            <option value="credito-habitacao">Crédito Habitação</option>
+                                            <option value="transferencia-credito">Transferência de Crédito Habitação</option>
+                                            <option value="credito-pessoal">Crédito Pessoal / Automóvel</option>
+                                            <option value="consolidacao-creditos">Consolidação de Créditos</option>
+                                        </select>
+                                    </div>
+
+                                    <div className="input-group">
+                                        <label className="input-label">Tem residência fiscal em Portugal? *</label>
+                                        <div className="radio-group">
+                                            <label className="radio-option">
+                                                <input
+                                                    type="radio"
+                                                    name="residenciaFiscal"
+                                                    value="sim"
+                                                    checked={residenciaFiscal === 'sim'}
+                                                    onChange={(e) => setResidenciaFiscal(e.target.value)}
+                                                    required
+                                                />
+                                                <span>Sim</span>
+                                            </label>
+                                            <label className="radio-option">
+                                                <input
+                                                    type="radio"
+                                                    name="residenciaFiscal"
+                                                    value="nao"
+                                                    checked={residenciaFiscal === 'nao'}
+                                                    onChange={(e) => setResidenciaFiscal(e.target.value)}
+                                                />
+                                                <span>Não</span>
+                                            </label>
                                         </div>
                                     </div>
 
-                                    <button onClick={handleSubmit} className="submit-btn" suppressHydrationWarning>
+                                    <div className="input-group">
+                                        <label className="input-label">Qual o seu estatuto em Portugal? *</label>
+                                        <select
+                                            className="form-select"
+                                            value={estatutoPortugal}
+                                            onChange={(e) => setEstatutoPortugal(e.target.value)}
+                                            required
+                                        >
+                                            <option value="">Selecione uma opção</option>
+                                            <option value="residente">Residente</option>
+                                            <option value="nao-residente">Não Residente</option>
+                                            <option value="residente-nao-habitual">Residente Não Habitual</option>
+                                        </select>
+                                    </div>
+
+                                    <div className="input-group">
+                                        <label className="input-label">Tem incidentes ativos no Banco de Portugal? *</label>
+                                        <select
+                                            className="form-select"
+                                            value={incidentesBP}
+                                            onChange={(e) => setIncidentesBP(e.target.value)}
+                                            required
+                                        >
+                                            <option value="">Selecione uma opção</option>
+                                            <option value="nao">Não</option>
+                                            <option value="sim">Sim</option>
+                                            <option value="nao-sei">Não sei</option>
+                                        </select>
+                                    </div>
+
+                                    <div className="input-group">
+                                        <label className="input-label">Situação profissional</label>
+                                        <select
+                                            className="form-select"
+                                            value={situacaoProfissional}
+                                            onChange={(e) => setSituacaoProfissional(e.target.value)}
+                                        >
+                                            <option value="">Selecione uma opção</option>
+                                            <option value="conta-outrem">Por conta de outrem</option>
+                                            <option value="conta-propria">Por conta própria</option>
+                                            <option value="funcionario-publico">Funcionário Público</option>
+                                            <option value="reformado">Reformado</option>
+                                            <option value="desempregado">Desempregado</option>
+                                            <option value="estudante">Estudante</option>
+                                        </select>
+                                    </div>
+
+                                    <div className="input-group">
+                                        <label className="input-label">Rendimentos do agregado *</label>
+                                        <select
+                                            className="form-select"
+                                            value={rendimentosAgregado}
+                                            onChange={(e) => setRendimentosAgregado(e.target.value)}
+                                            required
+                                        >
+                                            <option value="">Selecione uma opção</option>
+                                            <option value="menos-500">Menos de €500</option>
+                                            <option value="500-1000">€500 - €1.000</option>
+                                            <option value="1000-1500">€1.000 - €1.500</option>
+                                            <option value="1500-2000">€1.500 - €2.000</option>
+                                            <option value="2000-3000">€2.000 - €3.000</option>
+                                            <option value="mais-3000">Mais de €3.000</option>
+                                        </select>
+                                    </div>
+
+                                    <div className="input-group">
+                                        <label className="input-label">Nome *</label>
+                                        <input
+                                            type="text"
+                                            className="form-input"
+                                            value={nome}
+                                            onChange={(e) => setNome(e.target.value)}
+                                            placeholder="Nome Completo"
+                                            required
+                                            suppressHydrationWarning
+                                        />
+                                    </div>
+
+                                    <div className="input-group">
+                                        <label className="input-label">Telemóvel *</label>
+                                        <input
+                                            type="tel"
+                                            className="form-input"
+                                            value={telemovel}
+                                            onChange={(e) => setTelemovel(e.target.value)}
+                                            placeholder="Contacto"
+                                            required
+                                            suppressHydrationWarning
+                                        />
+                                    </div>
+
+                                    <div className="input-group">
+                                        <label className="input-label">Email *</label>
+                                        <input
+                                            type="email"
+                                            className="form-input"
+                                            value={email}
+                                            onChange={(e) => setEmail(e.target.value)}
+                                            placeholder="Email"
+                                            required
+                                            suppressHydrationWarning
+                                        />
+                                    </div>
+
+                                    <div className="checkbox-group">
+                                        <label className="checkbox-label">
+                                            <input
+                                                type="checkbox"
+                                                checked={consentimento}
+                                                onChange={(e) => setConsentimento(e.target.checked)}
+                                                required
+                                            />
+                                            <span>
+                                                Ao utilizar este formulário, concorda em fornecer as suas informações, 
+                                                para nós entrarmos em contacto. Os seus dados serão mantidos em sigilo 
+                                                e não serão compartilhados com terceiros.
+                                            </span>
+                                        </label>
+                                    </div>
+
+                                    <button 
+                                        onClick={handleSubmit} 
+                                        className="submit-btn" 
+                                        suppressHydrationWarning
+                                        disabled={!consentimento || !nome || !telemovel || !email || !tipoCredito || !residenciaFiscal || !estatutoPortugal || !incidentesBP || !rendimentosAgregado}
+                                    >
                                         Enviar Simulação
                                     </button>
 
