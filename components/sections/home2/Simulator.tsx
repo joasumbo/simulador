@@ -70,32 +70,25 @@ export default function Simulator() {
     const handleSubmit = async (e: React.MouseEvent<HTMLButtonElement>): Promise<void> => {
         e.preventDefault()
         
-        const formData: ContactFormData = {
-            name: nome,
-            email: email,
-            subject: 'Simulação de Crédito Habitação',
-            message: `Simulação realizada:
-
-DADOS DO CRÉDITO:
-Montante: €${formatCurrency(montante)}
-Entrada: €${formatCurrency(entrada)}
-Prazo: ${prazo} anos
-TAN: ${formatPercentage(tan, 3)}%
-Prestação Mensal: €${formatCurrency(prestacaoMensal)}
-TAEG: ${formatPercentage(taeg, 1)}%
-MTIC: €${formatCurrency(mtic)}
-Montante Total: €${formatCurrency(montanteTotal)}
-
-DADOS DO CLIENTE:
-Nome: ${nome}
-Telemóvel: ${telemovel}
-Email: ${email}
-Tipo de Crédito: ${tipoCredito}
-Residência Fiscal em Portugal: ${residenciaFiscal}
-Estatuto em Portugal: ${estatutoPortugal}
-Incidentes no Banco de Portugal: ${incidentesBP}
-Situação Profissional: ${situacaoProfissional}
-Rendimentos do Agregado: ${rendimentosAgregado}`
+        const formData = {
+            // Dados do crédito
+            montante,
+            entrada,
+            prazo,
+            tan,
+            prestacao: prestacaoMensal,
+            taeg,
+            montanteTotal,
+            // Dados pessoais
+            nome,
+            email,
+            telemovel,
+            tipoCredito,
+            residenciaFiscal,
+            estatutoPortugal,
+            incidentesBP,
+            situacaoProfissional,
+            rendimentosAgregado
         }
         
         try {

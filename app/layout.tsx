@@ -25,13 +25,14 @@ const muli = Mulish({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://dsicredito.pt'),
   title: "DS Intermediários de Crédito - Simulador de Crédito Habitação Online",
-  description: "Simule o seu crédito habitação em tempo real e encontre as melhores condições do mercado. Intermediários de crédito especializados em Vila Nova de Gaia. Contacte-nos: 226 007 286.",
-  keywords: "crédito habitação, simulador crédito, intermediários crédito, financiamento imobiliário, crédito habitação Portugal, Vila Nova de Gaia, TAN, TAEG, DS Crédito",
+  description: "Simule o seu crédito habitação em tempo real e encontre as melhores condições do mercado. Intermediários de crédito especializados em Leiria. Contacte-nos: 913 016 845.",
+  keywords: "crédito habitação, simulador crédito, intermediários crédito, financiamento imobiliário, crédito habitação Portugal, Leiria, TAN, TAEG, DS Crédito, crédito pessoal, consolidação créditos",
   authors: [{ name: "DS Intermediários de Crédito" }],
   openGraph: {
     title: "DS Intermediários de Crédito - Simulador de Crédito Habitação",
-    description: "Simule o seu crédito habitação online e encontre as melhores taxas. Especialistas em financiamento imobiliário.",
+    description: "Simule o seu crédito habitação online e encontre as melhores taxas. Especialistas em financiamento imobiliário em Leiria.",
     url: "https://dsicredito.pt",
     siteName: "DS Intermediários de Crédito",
     locale: "pt_PT",
@@ -39,9 +40,9 @@ export const metadata: Metadata = {
     images: [
       {
         url: "/assets/images/logo-ds.png",
-        width: 800,
-        height: 600,
-        alt: "DS Intermediários de Crédito"
+        width: 1200,
+        height: 630,
+        alt: "DS Intermediários de Crédito - Simulador Online"
       }
     ]
   },
@@ -71,6 +72,9 @@ export const metadata: Metadata = {
   },
   alternates: {
     canonical: "https://dsicredito.pt"
+  },
+  verification: {
+    google: "your-google-verification-code"
   }
 };
 
